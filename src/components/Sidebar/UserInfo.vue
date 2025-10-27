@@ -29,16 +29,20 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+
+    <!-- 个人信息对话框 -->
+    <ProfileDialog ref="profileDialogRef" />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { useAppStore } from '@/stores/app'
 import { User, Setting, SwitchButton } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import ProfileDialog from '@/components/Profile/ProfileDialog.vue'
 
 defineProps({
   collapsed: {
@@ -50,6 +54,7 @@ defineProps({
 const router = useRouter()
 const userStore = useUserStore()
 const appStore = useAppStore()
+const profileDialogRef = ref(null)
 
 const roleText = computed(() => {
   const roleMap = {
@@ -66,8 +71,7 @@ const handleCommand = async (command) => {
       appStore.showSettings()
       break
     case 'profile':
-      // TODO: 打开个人信息对话框
-      ElMessage.info('个人信息功能开发中')
+      profileDialogRef.value?.open()
       break
     case 'logout':
       try {

@@ -66,3 +66,13 @@ export function checkToken() {
   })
 }
 
+/**
+ * 获取用户Token使用信息
+ */
+export function getUserTokenInfo() {
+  return request({
+    url: '/user/token/info',
+    method: 'get'
+  })
+}
+
